@@ -1,17 +1,89 @@
-<!DOCTYPE html>
+{# <!DOCTYPE html> #}
 <html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div class="app">
+        <nav>
+            <div>
+                <a href="/"><img class="logo" src="{{ asset('images/LensPkr.svg') }}" alt="Logo-LensPkr"></a>
+            </div>
+            <div class="nav-mid">
+                <input class="search" type="text" placeholder="Search">
+                <a class="find-job-btn" href="">Find Jobs</a>
+                <a class="post-job-btn" href="">Post Jobs</a>
+            </div>
+            <div class="nav-right">
+                <a href=""><img class="option" src="{{ asset('images/User.svg') }}" alt="Profile"></a>
+                <a href=""><img class="option" src="{{ asset('images/Chat.svg') }}" alt="Chat"></a>
+                <a href=""><img class="option" src="{{ asset('images/Bell.svg') }}" alt="Notifications"></a>
+                <a href=""><img class="option" src="{{ asset('images/Settings.svg') }}" alt="Settings"></a>
+            </div>
+        </nav>
+        <div class="container">
+            <aside>
+                <div class="aside-block">
+                    <div class="aside-title"><img src="{{ asset('images/List.svg') }}" alt="Speciality-List">Speciality</div>
+                    <hr>
+                    <div class="aside-content">
+                        <a href="">Direction</a>
+                        <a href="">Production</a>
+                        <a href="">Video</a>
+                        <a href="">Sounds</a>
+                        <a href="">Lights</a>
+                    </div>
+                </div>
+                <div class="aside-block">
+                    <div class="aside-title"><img src="{{ asset('images/Project.svg') }}" alt=""> Project</div>
+                    <hr>
+                    <div class="aside-content">
+                        <a href="">Récents</a>
+                        <a href="">Popular</a>
+                        <a href="">Followed</a>
+                        <a href="">My Projects</a>
+                        <a href="">My Team's Projects</a>
+                    </div>
+                </div>
+                <div class="aside-block">
+                    <div class="aside-title"><img src="{{ asset('images/Team.svg') }}" alt="">Teams</div>
+                    <hr>
+                    <div class="aside-content">
+                        <a href="">My Team</a>
+                        <a href="">Popular Teams</a>
+                        <a href="">Followed Teams</a>
+                    </div>
+                </div>
+                <footer class="aside-block">
+                    <div class="aside-title"><img src="{{ asset('images/Lock.svg') }}" alt="">General Terms and Conditions</div>
+                    <hr>
+                    <div class="aside-content">
+                        <a href="">Rules</a>
+                        <a href="">Privacy Police</a>
+                        <a href="">User Contract</a>
+                        <a href="">About Us</a>
+                    </div>
+                    <hr>
+                    <span>&copy; 2025 LensPkr by <br>LeLylas</span>
+                </footer>
+            </aside>
+        </div>
+    </div>
+    <div class="page">
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}
+        {% endblock %}
+    {% endblock %}
     </body>
 </html>
