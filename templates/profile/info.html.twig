@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<div class="user-page">
+    <div class="banner">
+        <img src="{{ asset('images/banner.jpg') }}" alt="">
+        <div class="user-pic">
+            <img src="{{ asset('images/User-1.jpg') }}" alt="">
+        </div>
+    </div>
+    <div class="user-container">
+        <div class="user-info">
+            <div class="edit-btns">
+                <a href="">Edit Infos</a>
+            </div>
+            <h3>User Name : <br><p>{{ user.name }}{{" "}}{{ user.forename }}</p></h3>
+            <h4>User Email : <br><p>{{ user.email }}</p></h4>
+            <h4>User Country : <br><p>{{ user.country }}</p></h4>
+            <h4>User City : <br><p>{{ user.city }}</p></h4>
+        </div>
+        <div class="user-exp">
+            <h3>Specialities :</h3><br>
+            <h3>Experiences :</h3>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

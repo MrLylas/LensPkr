@@ -16,4 +16,13 @@ final class ProfileController extends AbstractController
             'user' => $this->getUser(),
         ]);
     }
+    #[Route('/profile/info', name: 'info_profile')]
+    public function info(): Response
+    {
+        return $this->render('profile/info.html.twig', [
+            'controller_name' => 'ProfileController',
+            'user' => $this->getUser(),
+        ]);
+    }
+
 }
