@@ -10,12 +10,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
         {% endblock %}
     </head>
-<aside>
-    <div class="category">
-        <div class="aside-title"></div>
-    </div>
-</aside>
-{% block javascripts %}
-    {% block importmap %}{{ importmap('app') }}
-    {% endblock %}
-{% endblock %}
+    <body>
+        {% block body %}
+        {% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}
+            {% endblock %}
+        {% endblock %}
+    </body>
+</html>
