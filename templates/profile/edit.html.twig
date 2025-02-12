@@ -13,16 +13,21 @@
     <div class="user-container">
         <div class="user-info">
             <div class="edit-btns">
-                <a href="">Edit Infos</a>
+                <a href="">Cancel</a>
             </div>
-            <h3>Name : <br><p>{{ user.name }}{{" "}}{{ user.forename }}</p></h3>
-            <h3>Pseudo : <br><p>{{ user.pseudo }}</p></h3>
+            {{ form_start(formAddInfo) }}
+            <h3>Name : <br><p>{{ form_row(formAddInfo.name) }}{{" "}}{{ form_row(formAddSession.forename) }}</p></h3>
+            <h3>Pseudo : <br><p>{{ form_row(formAddInfo.pseudo) }}</p></h3>
             <h4>Email : <br><p>{{ user.email }}</p></h4>
-            <h4>Country : <br><p>{{ user.country }}</p></h4>
-            <h4>City : <br><p>{{ user.city }}</p></h4>
+            <h4>Country : <br><p>{{ form_row(formAddInfo.country) }}</p></h4>
+            <h4>City : <br><p>{{ form_row(formAddInfo.city) }}</p></h4>
+            {{ form_end(formAddInfo) }}
         </div>
         <div class="user-exp">
-            <h3>Specialities :</h3><br>
+            <h3>Skills :</h3><br>
+            {% for skill in user_skills %}
+                <p>{{ skill }}</p><br>
+            {% endfor %}
             <h3>Experiences :</h3>
         </div>
     </div>

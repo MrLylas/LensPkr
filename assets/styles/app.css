@@ -10,7 +10,6 @@ body {
 .app{
     width: 100%;
     position:fixed;
-    z-index: 100;
 
         nav{
             display: flex;
@@ -21,6 +20,7 @@ body {
             box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             background-color: #a5b5df80;
             font-family: "Jura", serif;
+            z-index: 1000;
 
         
             .logo{
@@ -89,9 +89,28 @@ body {
                     justify-content: space-between;
                     width: 15%;
         
-                    .option{
+                    .user{
                         width: 20px;
                         height: 20px;
+
+                    }
+                    .chat{
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .notification{
+                        width: 20px;
+                        height: 20px;
+
+                    }
+                    .setting{
+                        width: 20px;
+                        height: 20px;
+
+                    }
+                    .setting:hover{
+                        scale: 1.1;
+                    
                     }
                 }
             }
