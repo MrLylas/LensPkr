@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Level;
 use App\Entity\User;
+use App\Entity\Level;
+use App\Form\UserType;
 use App\Entity\UserSkill;
 use App\Repository\UserRepository;
 use App\Repository\UserSkillRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ProfileController extends AbstractController
 {
@@ -23,31 +26,41 @@ final class ProfileController extends AbstractController
             'user' => $user,
         ]);
     }
-
-    #[Route('/profile/info/', name: 'info_profile')]
-    public function info(Level $levels): Response
+    
+    #[Route('/profile/edit/{id}', name: 'edit_user')]
+    public function edit_user(Request $request,EntityManagerInterface $entityManager, User $user): Response
     {
-        $user = $this->getUser();
-        $skills = $user->getUserSkills(); 
-        $level = $levels->getLevelName();
+        $user_skill = $entityManager->getRepository(UserSkill::class)->findBy(['user' => $user->getId()]);
+        
+        $skills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($user_skill);
 
-        return $this->render('profile/info.html.twig', [
-            'controller_name' => 'ProfileController',
+        $user = $this->getUser();
+        $user_skills = $user->getUserSkills();
+        
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);//On prend en charge la requête demandée 
+
+        if ($form->isSubmitted() && $form->isValid()) {//Si le formulaire est envoyé et valide
+
+            $user = $form->getData();//Recuperation des données du formulaire
+
+            $entityManager->persist($user);//Similaire à pdo->prepare
+
+            $entityManager->flush();//Similaire à pdo->execute
+
+            return $this->redirectToRoute('app_user_skill');//Redirection vers la liste des sessions
+        }
+        
+        return $this->render('/profile/edit.html.twig', [
+            'formEditUser' => $form,
+            'id'=> $user->getId(),
             'user' => $user,
+            'user_skills' => $user_skills,
             'skills' => $skills,
-            'level' => $level
+
         ]);
     }
 
-    #[Route('/profile/edit/', name: 'edit_profile')]
-    public function edit(): Response
-    {
-        $user = $this->getUser();
-
-        return $this->render('profile/edit.html.twig', [
-            'controller_name' => 'ProfileController',
-            'user' => $user,
-        ]);
-    }
 
 }
