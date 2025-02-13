@@ -26,6 +26,7 @@ final class UserSkillController extends AbstractController
 
         $user = $this->getUser();
         $user_skills = $user->getUserSkills();
+        $user_id = $user->getId();
         
 
         return $this->render('profile/skill.html.twig', [
@@ -33,6 +34,7 @@ final class UserSkillController extends AbstractController
             'user' => $user,
             'user_skills' => $user_skills,
             'skills' => $skills,
+            'id'=> $user_id,
         ]);
     }
 
@@ -47,6 +49,22 @@ final class UserSkillController extends AbstractController
     //     return $this->render('profile/skill.html.twig',[
     //         'skills' => $skills,
     //         'user' => $user
+    //     ]);
+    // }
+
+    // #[Route('/profile/skill/{id}', name: 'edit_skill')]
+    // public function edit_skill(UserSkill $user_skill, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $user_skill = $entityManager->getRepository(UserSkill::class)->findBy(['user' => $user->getId()]);
+
+    //     $SkillForm = $this->createForm(UserSkillType::class, $user_skill);
+    //     $SkillForm->handleRequest($request);
+
+
+
+    //     return $this->render('profile/test.html.twig', [
+    //         'formSkill' => $SkillForm,
+    //         'user_skill' => $user_skill
     //     ]);
     // }
 
@@ -68,5 +86,8 @@ final class UserSkillController extends AbstractController
 
         return $this->redirectToRoute('app_user_skill');
     }
+
+
+
 
 }

@@ -25,19 +25,32 @@
             {{ form_end(formEditUser) }}
         </div>
         <div class="user-exp">
-            <div class="exp-left">
-                {% for skill in user_skills %}
-                    <p>{{ skill }}</p><a href="{{path('delete_skill', {'id': skill.id})}}">Delete</a><br>
-                {% endfor %}
-            </div>
-            <div class="exp-right">
-                {% for skill in skills %}
-                    <p>{{ skill }}</p><a href="{{path('add_skill', {'id': skill.id})}}">Add</a><br>
-                {% endfor %}
-                <a href="{{path('app_user_skill', {'id': user.id})}}">Validate</a>
-            </div>
         </div>
     </div>
 </div>
 
 {% endblock %}
+
+
+{# <div class="exp-left">
+    {% for skill in user_skills %}
+        <p>{{ skill }}</p><a href="{{path('delete_skill', {'id': skill.id})}}">Delete</a><br>
+    {% endfor %}
+</div>
+<div class="exp-right">
+    <select name="" id="">                 
+        {% for speciality in specialities %}
+            <option value="">{{ speciality }}</option>
+        {% endfor %}
+    </select>
+    <select name="" id="">
+        {% for skill in skills %}
+            <option value="">{{ skill }}</option>
+        {% endfor %}
+    </select>
+    <select name="" id="">
+        {% for level in levels %}
+            <option value="">{{ level }}</option>
+        {% endfor %}
+    </select>
+</div> #}

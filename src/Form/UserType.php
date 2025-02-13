@@ -26,7 +26,11 @@ class UserType extends AbstractType
             ->add('biography')
             ->add('submit', SubmitType::class,[
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-success',
+                    'value' => 'Modifier',
+                    'type' => 'submit',
+                    'id' => 'submit',
+                    'name' => 'submit',
                 ]
             ])
         ;
