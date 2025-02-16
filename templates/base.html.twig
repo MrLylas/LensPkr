@@ -15,7 +15,8 @@
     <div class="app">
         <nav>
             <div>
-                <a href="{{path('app_home', {'id': user.id})}}"><img class="logo" src="{{ asset('images/LensPkr.svg') }}" alt="Logo-LensPkr"></a>
+                {# <a href="{{path('app_home')}}"><img class="logo" src="{{ asset('images/LensPkr.svg') }}" alt="Logo-LensPkr"></a> #}
+                <a href="{{path('app_home')}}"><img class="logo" src="{{ asset('images/LensPkr.svg') }}" alt="Logo-LensPkr"></a>
             </div>
             <div class="nav-mid">
                 <input class="search" type="text" placeholder="Search">
@@ -23,10 +24,12 @@
                 <a class="post-job-btn" href="">Post Jobs</a>
             </div>
             <div class="nav-right">
-                <a href="{{ path('app_user_skill', {'id': user.id}) }}"><img class="user" src="{{ asset('images/User.svg') }}" alt="Profile"></a>
-                <a href=""><img class="chat" src="{{ asset('images/Chat.svg') }}" alt="Chat"></a>
-                <a href=""><img class="notification" src="{{ asset('images/Bell.svg') }}" alt="Notifications"></a>
-                <a href=""><img class="setting" src="{{ asset('images/Settings.svg') }}" alt="Settings"></a>
+                {% if app.user is not null %}        
+                    <a href="{{ path('app_user_skill', {'id': user.id}) }}"><img class="user" src="{{ asset('images/User.svg') }}" alt="Profile"></a>
+                    <a href=""><img class="chat" src="{{ asset('images/Chat.svg') }}" alt="Chat"></a>
+                    <a href=""><img class="notification" src="{{ asset('images/Bell.svg') }}" alt="Notifications"></a>
+                    <a href=""><img class="setting" src="{{ asset('images/Settings.svg') }}" alt="Settings"></a>
+                {% endif %}
             </div>
         </nav>
         <div class="container">

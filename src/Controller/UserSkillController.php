@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Level;
 use App\Entity\UserSkill;
+use App\Entity\Speciality;
 use App\Form\UserSkillType;
 use App\Repository\LevelRepository;
 use App\Repository\UserSkillRepository;
@@ -20,9 +21,9 @@ final class UserSkillController extends AbstractController
     public function index(User $user, EntityManagerInterface $entityManager): Response
     {
 
-        $user_skill = $entityManager->getRepository(UserSkill::class)->findBy(['user' => $user->getId()]);
-        
-        $skills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($user_skill);
+        // $user_skill = $entityManager->getRepository(UserSkill::class)->findBy(['user' => $user->getId()]);
+
+        $skills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($user->getId());
 
         $user = $this->getUser();
         $user_skills = $user->getUserSkills();
@@ -49,6 +50,32 @@ final class UserSkillController extends AbstractController
     //     return $this->render('profile/skill.html.twig',[
     //         'skills' => $skills,
     //         'user' => $user
+    //     ]);
+    // }
+
+    // #[Route('/profile/skill/{id}', name: 'edit_skill')]
+    // public function editSkill(UserSkill $userSkill, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $availableSkills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($userSkill);
+    //     $levels = $entityManager->getRepository(Level::class)->findAll();
+    //     $specialities = $entityManager->getRepository(Speciality::class)->findAll();
+
+    //     $skillForm = $this->createForm(UserSkillType::class, $userSkill);
+    //     $skillForm->handleRequest($request);
+
+    //     if ($skillForm->isSubmitted() && $skillForm->isValid()) {
+    //         $entityManager->persist($userSkill);
+    //         $entityManager->flush();
+
+    //         return $this->redirectToRoute('app_user_skill');
+    //     }
+
+    //     return $this->render('profile/edit_skill.html.twig', [
+    //         'skillForm' => $skillForm,
+    //         'userSkill' => $userSkill,
+    //         'availableSkills' => $availableSkills,
+    //         'levels' => $levels,
+    //         'specialities' => $specialities
     //     ]);
     // }
 

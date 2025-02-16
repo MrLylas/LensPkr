@@ -453,6 +453,14 @@ body {
                     height: 100%;
                     border-radius: 50%;
                 }
+
+                .change-pic{
+                    width: 100%;
+                    position: relative;
+                    top: -200px;
+                    text-align: center;
+                    font-family: "Jura", serif;
+                }
             }
         }
         
