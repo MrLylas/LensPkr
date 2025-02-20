@@ -52,7 +52,7 @@ final class ProfileController extends AbstractController
 
 
 
-            
+
 
             if ($user->getProfilePicture()) {
                 $filesystem = new Filesystem();
@@ -64,11 +64,8 @@ final class ProfileController extends AbstractController
 
             
             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            // this is needed to safely include the file name as part of the URL
             $safeFilename = $originalFilename;
             $newFilename = $safeFilename . '.' . $imageFile->guessExtension();
-
-            // Move the file to the directory where brochures are stored
             try {
                 $imageFile->move(
                     $this->getParameter('images_directory'),
@@ -76,7 +73,6 @@ final class ProfileController extends AbstractController
                 );
                 $user->setProfilePic($newFilename);
             } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
                 $this->addFlash('error', 'An error occurred while uploading the image.');
             }
         }
