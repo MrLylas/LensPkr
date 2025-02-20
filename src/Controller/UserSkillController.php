@@ -17,27 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class UserSkillController extends AbstractController
 {
-    #[Route('/profile/skill/{id}', name: 'app_user_skill')]
-    public function index(User $user, EntityManagerInterface $entityManager): Response
-    {
 
-        // $user_skill = $entityManager->getRepository(UserSkill::class)->findBy(['user' => $user->getId()]);
-
-        $skills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($user->getId());
-
-        $user = $this->getUser();
-        $user_skills = $user->getUserSkills();
-        $user_id = $user->getId();
-        
-
-        return $this->render('profile/skill.html.twig', [
-            'controller_name' => 'UserSkillController',
-            'user' => $user,
-            'user_skills' => $user_skills,
-            'skills' => $skills,
-            'id'=> $user_id,
-        ]);
-    }
 
     // #[Route('/profile/skill/{id}', name: 'app_user_skill')]
     // public function list_skill(User $user, EntityManagerInterface $entityManager): Response
