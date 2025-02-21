@@ -66,9 +66,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $biography = null;
 
+    /**
+     * @var Collection<int, Ask>
+     */
+    #[ORM\OneToMany(targetEntity: Ask::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $asks;
+
+    /**
+     * @var Collection<int, Job>
+     */
+    #[ORM\OneToMany(targetEntity: Job::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $jobs;
+
     public function __construct()
     {
         $this->userSkills = new ArrayCollection();
+        $this->asks = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -275,6 +289,77 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBiography(?string $biography): static
     {
         $this->biography = $biography;
+
+        return $this;
+    }
+
+    public function getProfilePicUrl(): ?string
+    {
+        if ($this->profile_pic) {
+            return null;
+        } 
+        if(strpos($this->profile_pic, '/') !== false) {
+            return $this->profile_pic;
+        }
+        return sprintf('/uploads/profile_pictures/%s', $this->profile_pic);
+    }
+
+    /**
+     * @return Collection<int, Ask>
+     */
+    public function getAsks(): Collection
+    {
+        return $this->asks;
+    }
+
+    public function addAsk(Ask $ask): static
+    {
+        if (!$this->asks->contains($ask)) {
+            $this->asks->add($ask);
+            $ask->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAsk(Ask $ask): static
+    {
+        if ($this->asks->removeElement($ask)) {
+            // set the owning side to null (unless already changed)
+            if ($ask->getUser() === $this) {
+                $ask->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Job>
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): static
+    {
+        if (!$this->jobs->contains($job)) {
+            $this->jobs->add($job);
+            $job->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJob(Job $job): static
+    {
+        if ($this->jobs->removeElement($job)) {
+            // set the owning side to null (unless already changed)
+            if ($job->getUser() === $this) {
+                $job->setUser(null);
+            }
+        }
 
         return $this;
     }

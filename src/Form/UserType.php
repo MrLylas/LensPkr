@@ -28,8 +28,8 @@ class UserType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File ([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => ['image/jpeg','image/jpg','image/png','image/webp'],
+                        'maxSize' => '3000k',
+                        'mimeTypes' => ['image/*',],
                         'mimeTypesMessage' => 'Please upload a valid Image File (jpg, jpeg, png, webp)',
                         ])
                     ],

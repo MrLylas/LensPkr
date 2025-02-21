@@ -8,6 +8,7 @@ use App\Form\UserType;
 use App\Entity\UserSkill;
 use App\Entity\Speciality;
 use App\Form\UserSkillType;
+use App\Service\FileUploader;
 use Doctrine\ORM\Mapping\Entity;
 use App\Repository\UserRepository;
 use App\Repository\UserSkillRepository;
@@ -32,7 +33,7 @@ final class ProfileController extends AbstractController
     }
 
     #[Route('/profile/edit/{id}', name: 'edit_user')]
-    public function edit_user(Request $request, EntityManagerInterface $entityManager, User $user): Response
+    public function edit_user(Request $request, EntityManagerInterface $entityManager, User $user, FileUploader $fileUploader): Response
     {
 
     $userSkill = $entityManager->getRepository(UserSkill::class)->findOneBy(['user' => $this->getUser()->getId()]);
@@ -42,40 +43,21 @@ final class ProfileController extends AbstractController
 
     $userForm = $this->createForm(UserType::class, $user);
     $userForm->handleRequest($request);
-
+    
     if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+        $uploadedFile = $userForm->get('profile_pic')->getData();
         $user = $userForm->getData();
-        $imageFile = $userForm->get('profile_pic')->getData();
 
-        if ($imageFile) {
-            //Supprimer l'ancienne image
-
-
-
-
-
-            if ($user->getProfilePicture()) {
-                $filesystem = new Filesystem();
-                $filesystem->remove($this->getParameter('profile_pictures_directory') . '/' . $user->getProfilePicture());
-            }
-
-
-
-
-            
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $originalFilename;
-            $newFilename = $safeFilename . '.' . $imageFile->guessExtension();
-            try {
-                $imageFile->move(
-                    $this->getParameter('images_directory'),
-                    $newFilename
-                );
-                $user->setProfilePic($newFilename);
-            } catch (FileException $e) {
-                $this->addFlash('error', 'An error occurred while uploading the image.');
-            }
+        if ($user->getProfilePic() != null) {
+            $path = $this->getParameter('upload_directory')."/".$user->getProfilePic();
+            unlink($path);
         }
+        if ($uploadedFile) {
+            $newFilename = $fileUploader->upload($uploadedFile);
+            $user->setProfilePic($newFilename);
+        }
+    
         $entityManager->persist($user);
         $entityManager->flush();
         

@@ -7,7 +7,11 @@
     <div class="banner">
         <img src="{{ asset('images/banner.jpg') }}" alt="">
         <div class="user-pic">
-            <img src="{{ asset('images/User-1.jpg') }}" alt="">
+            {% if user.profilePic %}
+                <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePic) }}" alt="{{ user.name }}{{" "}}{{ user.forename }}'s Profile Pic">
+            {% else  %}
+                <img src="{{ asset('images/default_user.jpg') }}" alt="Default profile pic">
+            {% endif %}
         </div>
     </div>
     <div class="user-container">
@@ -22,22 +26,14 @@
             <h4>City :</h4>{{ form_row(formEditUser.city) }}
             <h4>About Me :</h4>{{ form_row(formEditUser.biography) }}
             <h4>Skills :</h4>{{ form_row(formEditUser.userSkills) }}
+            {{ form_row(formEditUser.profile_pic, {'label': 'Profile Pic'},mapped:false,attr:{onchange:"previewImage(this);"}) }}
             {{ form_row(formEditUser.submit) }}
             {{ form_end(formEditUser) }}
         </div>
         <div class="user-exp">
             <div class="exp-left">
-                {# {% for skill in userSkill %}
-                    <p>{{ skill }}</p><a href="{{path('delete_skill', {'id': skill.id})}}">Delete</a><br>
-                {% endfor %} #}
             </div>
             <div class="exp-right">
-                {# {{form_start(skillForm)}}
-                    {{form_row(skillForm.user)}}
-                    {{form_row(skillForm.skills)}}
-                    {{form_row(skillForm.levels)}}
-                    {{form_row(skillForm.submit)}}
-                {{form_end(skillForm)}} #}
             </div>
         </div>
     </div>
