@@ -9,11 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/LensPkr/src/Controller/JobController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/LensPkr/templates/job/index.html.twig</code></li>
-    </ul>
+    <h2>Jobs</h2>
+    {% if jobs %}    
+        {% for job in jobs %}
+            <div class="card">
+                {{ job.jobName }} <br>
+                {{ job.description }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No jobs found.</p>
+    {% endif %}
 </div>
 {% endblock %}

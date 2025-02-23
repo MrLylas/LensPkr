@@ -10,6 +10,10 @@
 
 <div class="example-wrapper">
     <h2>Post a job</h2>
-
+    {{ form_start(form) }}
+        {{ form_row(form.job_name) }}
+        {{ form_row(form.description) }}
+        {# {{ form_row(form.submit) }} #}
+    {{ form_end(form) }}
 </div>
 {% endblock %}

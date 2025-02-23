@@ -71,7 +71,7 @@ class Job
 
     public function getCreation(): ?\DateTimeInterface
     {
-        return $this->creation;
+        return $this->creation = new \DateTime();
     }
 
     public function setCreation(\DateTimeInterface $creation): static
