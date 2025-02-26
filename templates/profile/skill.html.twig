@@ -31,6 +31,9 @@
                 {% for skill in userSkills %}
                     <p>{{ skill }}</p>
                 {% endfor %}
+                {% for job in app.user.jobs %}
+                    <a href="{{ path('app_answers', {'id': job.id}) }}">{{ job.jobName }}</a>
+                {% endfor %}
             </div>      
         </div>
     </div>

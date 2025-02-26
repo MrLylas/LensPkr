@@ -486,6 +486,52 @@ body {
                     padding-top: 60px;
                     z-index: 10000;
 
+                        form{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            input{
+                                display: flex;
+                                width: 300px;
+                                flex-direction: column;
+                                align-items: center;
+                                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+                                background-color: #03191E;
+                                padding: 5px 10px;
+                                border-radius: 5px;
+                                color: #FFDD4A;
+                                margin-bottom: 10px;
+
+                            }
+                            
+                            button{
+                                background-color: #03191E;
+                                padding: 5px 10px;
+                                border-radius: 5px;
+                                color: #FFDD4A;
+                                cursor: pointer;
+                            }
+
+                            button:hover{
+                                background-color: #FFDD4A;
+                                color: #03191E;
+                            }
+                            textarea{
+                                display: flex;
+                                width: 300px;
+                                height: 100px;
+                                flex-direction: column;
+                                align-items: center;
+                                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+                                background-color: #03191E;
+                                padding: 5px 10px;
+                                border-radius: 5px;
+                                color: #FFDD4A;
+                                margin-bottom: 10px;
+                            }
+                        }
+
                         .edit-btns{
                             width: 100%;
                             display: flex;
@@ -580,7 +626,88 @@ body {
         
         
     }
-    .example-wrapper{
-        background-color: #ffffff;
-        z-index: 99;
+
+h2{
+    color: #FFDD4A;
+    margin: 0 auto;
+}
+.example-wrapper{
+    padding: 15px;
+    width: 100%;
+    border: #FFDD4A 1px solid;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: #a5b5df80;
+    z-index: 99;
+
+        form{
+            display: flex;
+            flex-direction: column;
+
+            div{
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 10px;
+                input{
+                    margin-bottom: 10px;
+                    margin-left: 20px;
+                    border-radius: 5px;
+                    border: 1px solid #FFDD4A;
+                    min-width: 300px;
+                    height: 30px;
+                }
+    
+                textarea{
+                    margin-bottom: 10px;
+                    margin-left: 10px;
+                    border-radius: 5px;
+                    border: 1px solid #FFDD4A;
+                    min-width: 300px;
+                    min-height: 100px;
+                }
+    
+                label{
+                    color: #FFDD4A;
+                }
+
+                button{
+                    width: 100px;
+                    height: 30px;
+                    border-radius: 5px;
+                    border: 1px solid #FFDD4A;
+                    background-color: #03191E;
+                    color: #FFDD4A;
+                }
+
+                button:hover{
+                    background-color: #FFDD4A;
+                    color: #03191E;
+                    cursor: pointer;
+                }
+            }
+            
+        }
+        .jobcard{
+           width: 95%;
+           margin: 10px;
+           padding: 10px;
+           height: fit-content;
+           border: #FFDD4A 1px solid;
+           z-index: 1000;
+           border-radius: 15px;
+           box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+           background-color: #a5b5df80;
+
+           h3{
+               color: #FFDD4A;
+               font-family: "Jura", serif;
+           }
+
+           p{
+               margin-bottom: 10px;
+               margin-left: 20px;
+               font-family: "Jura", serif;
+           }
     }
+
+}

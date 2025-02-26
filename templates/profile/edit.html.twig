@@ -20,12 +20,12 @@
                 <a href="{{path('app_user_skill', {'id': user.id})}}">Cancel</a>
             </div>
             {{ form_start(formEditUser) }}
-            <h3>Name :</h4>{{ form_row(formEditUser.name) }}{{" "}}{{ form_row(formEditUser.forename) }}
-            <h3>Pseudo :</h4>{{ form_row(formEditUser.pseudo) }}
-            <h4>Country :</h4>{{ form_row(formEditUser.country) }}
-            <h4>City :</h4>{{ form_row(formEditUser.city) }}
-            <h4>About Me :</h4>{{ form_row(formEditUser.biography) }}
-            <h4>Skills :</h4>{{ form_row(formEditUser.userSkills) }}
+            {{ form_row(formEditUser.name) }}{{" "}}{{ form_row(formEditUser.forename) }}
+            {{ form_row(formEditUser.pseudo) }}
+            {{ form_row(formEditUser.country) }}
+            {{ form_row(formEditUser.city) }}
+            {{ form_row(formEditUser.biography) }}
+            {{ form_row(formEditUser.userSkills) }}
             {{ form_row(formEditUser.profile_pic, {'label': 'Profile Pic'},mapped:false,attr:{onchange:"previewImage(this);"}) }}
             {{ form_row(formEditUser.submit) }}
             {{ form_end(formEditUser) }}

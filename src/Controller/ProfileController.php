@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Ask;
+use App\Entity\Job;
 use App\Entity\User;
 use App\Entity\Level;
 use App\Form\UserType;
@@ -72,28 +74,42 @@ final class ProfileController extends AbstractController
         'user' => $user,
         'id'=> $user->getId(),
     ]);
-}
+    }
 
-#[Route('/profile/skill/{id}', name: 'app_user_skill')]
-public function show_skill(User $user, EntityManagerInterface $entityManager): Response
-{
+    #[Route('/profile/skill/{id}', name: 'app_user_skill')]
+    public function show_skill(User $user, EntityManagerInterface $entityManager): Response
+    {
 
-    // $user_skill = $entityManager->getRepository(UserSkill::class)->findBy(['user' => $user->getId()]);
+        $skills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($user->getId());
 
-    $skills = $entityManager->getRepository(UserSkill::class)->findSkillNotInUser($user->getId());
 
-    $user = $this->getUser();
-    $userSkills = $user->getUserSkills();
-    $user_id = $user->getId();
-    
+        $user = $this->getUser();
+        $userSkills = $user->getUserSkills();
+        $user_id = $user->getId();
+        
 
-    return $this->render('profile/skill.html.twig', [
-        'controller_name' => 'UserSkillController',
-        'user' => $user,
-        'userSkills' => $userSkills,
-        'skills' => $skills,
-        'id'=> $user_id,
-    ]);
-}
+        return $this->render('profile/skill.html.twig', [
+            'controller_name' => 'UserSkillController',
+            'user' => $user,
+            'userSkills' => $userSkills,
+            'skills' => $skills,
+            'id' => $user_id,
+        ]);
+    }
 
+    #[Route('/profile/job/answer/{id}', name: 'app_answers')]
+    public function showAnswers(Job $job): Response{
+
+        $user = $this->getUser();
+
+        // $asks = $entityManager->getRepository(Ask::class)->findBy(['job' => $job->getId()]);
+
+
+        return $this->render('profile/answers.html.twig', [
+            'controller_name' => 'UserSkillController',
+            'user' => $user,
+            // 'asks' => $asks,
+            'job' => $job
+        ]);
+    }
 }

@@ -23,6 +23,9 @@
                 {% if app.user is not null %}  
                 <a class="find-job-btn" href="{{path('app_job', {'id': user.id})}}">Find Jobs</a>
                 <a class="post-job-btn" href="{{path('post_job', {'id': user.id})}}">Post Jobs</a>
+                {% else %}
+                <a class="find-job-btn" href="{{path('app_login')}}">Login</a>
+                <a class="post-job-btn" href="{{path('app_register')}}">Sign in</a>
                 {% endif %}
             </div>
             <div class="nav-right">

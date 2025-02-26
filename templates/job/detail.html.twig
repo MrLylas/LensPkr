@@ -8,11 +8,10 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+<h2>Job Detail</h2>
 <div class="example-wrapper">
-    <h2>Post a job</h2>
-    {{ form_start(form) }}
-        {{ form_row(form.job_name) }}
-        {{ form_row(form.description) }}
-    {{ form_end(form) }}
+    <h3>{{ job.jobName }} </h3>
+    <p>{{ job.description }}</p>  
+    <a href="{{ path('app_apply_job', {'id': job.id})}}">Apply</a>
 </div>
 {% endblock %}

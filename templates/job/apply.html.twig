@@ -8,11 +8,11 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+<h2>Apply Form</h2>
 <div class="example-wrapper">
-    <h2>Post a job</h2>
     {{ form_start(form) }}
-        {{ form_row(form.job_name) }}
         {{ form_row(form.description) }}
+        {{ form_row(form.submit) }}
     {{ form_end(form) }}
 </div>
 {% endblock %}
